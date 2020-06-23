@@ -22,7 +22,7 @@
 
 ### Data Export(點雲輸出):
 * 輸出.pcd
-* 點選一個圖層，自動抓取底下已分割完成的所有子類圖層(紅色框選圖層)資訊
+* 點選一個圖層，自動抓取底下已分割完成的所有子類圖層資訊
 ![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/version_05a_1.png)
 ![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/version_05a_2.png)
 > 使用限制 :
@@ -100,5 +100,6 @@
  - 點選point_nd_decrease_0.pcd對應輸出的圖層數為5(ID 為 0,1,2,3,4)
 ![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_16.png)
 > 輸出資料內容
+
 ![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_18.png)
 ![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_17.png)
