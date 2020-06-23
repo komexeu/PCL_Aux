@@ -62,3 +62,43 @@
 |N|筆刷縮小|
 |M|筆刷放大|太大時效能較差，有可能當機
 
+## 使用範例:
+> "Data Import"匯入點雲:
+
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_1.png)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_2.png)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_3.png)
+
+> 點雲數量為921599，手動將資料量降低，步驟:
+
+ 1. 按下"x"鍵開啟框選標記功能。
+ 2. 標記完畢後按下左側"User Segmentate"。
+ 
+ ![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_4.png)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_5.png)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_6.png)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_7.png)
+
+> 快速群集分割，步驟:
+
+ 1. 使用底下滑條來做快速基本分割，以不同顏色來分割表示結果預覽。
+ 2. 確定範圍後按下"Slider Segmentate"來做分割。
+
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_8.png)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_9.png)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_10.png)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_11.png)
+> 使用垃圾桶刪除不要的圖層。
+
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_13.png)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_14.png)
+
+> 按下"Data Export"輸出資料(紅框內為選取不同圖層後，對應輸出的圖層)。
+
+ - 點選20200619154445.pcd對應輸出的圖層數為2(ID 為 0,1)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_15.png)
+ - 點選point_nd_decrease_0.pcd對應輸出的圖層數為5(ID 為 0,1,2,3,4)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_16.png)
+> 輸出資料內容
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_18.png)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_17.png)
