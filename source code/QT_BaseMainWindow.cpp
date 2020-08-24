@@ -133,7 +133,7 @@ void QT_BaseMainWindow::realsense_getpoints() {
 	WinExec("cmd /c start ./realsense_externalExe/realsense_externalExe.exe", SW_HIDE);
 	ui.label->setText("END");*/
 	//======================
-	vector<PointCloud<PointXYZRGB>::Ptr> clouds;
+	/*vector<PointCloud<PointXYZRGB>::Ptr> clouds;
 	clouds.resize(2);
 	for (int i = 0; i < 2; i++) {	
 		clouds[i].reset(new PointCloud<PointXYZRGB>);
@@ -143,7 +143,7 @@ void QT_BaseMainWindow::realsense_getpoints() {
 	qDebug() << "target->" << io::loadPCDFile<PointXYZRGB>("D:/testDataForAlign/0002.pcd", *clouds[1]);
 
 	CloudPoints_Tools cpTools;
-	cpTools.registrationClouds(clouds);
+	cpTools.registrationClouds(clouds);*/
 	//=================
 	//realsense_control *rs_con = new realsense_control();
 	//rs_con->initRs();
@@ -158,7 +158,7 @@ void QT_BaseMainWindow::realsense_getpoints() {
 	//	int searched_points = 0;
 	//	search::KdTree<PointXYZRGB>::Ptr tree(new search::KdTree<PointXYZRGB>);
 	//	tree->setInputCloud(nowCloud);
-	//	qDebug() << "001";
+
 	//	//取1000點做平均取距離
 	//	for (int i = 0; i < (nowCloud->size() >= 1000 ? 1000 : nowCloud->size()); ++i)
 	//	{
@@ -170,7 +170,7 @@ void QT_BaseMainWindow::realsense_getpoints() {
 	//			++searched_points;
 	//		}
 	//	}
-	//	qDebug() << "002";
+
 	//	if (searched_points != 0) {
 	//		data.nowCloud_avg_distance = norm /= searched_points;
 	//		data.brush_radius = data.nowCloud_avg_distance * 50;
@@ -196,11 +196,7 @@ void QT_BaseMainWindow::realsense_getpoints() {
 	////-------------------
 	////rs_con->initRs();
 	//////bool result = rs_con->rsShow();
-	////qDebug() << result;
-	////qDebug() << result;
-	////qDebug() << result;
-	////qDebug() << result;
-	////qDebug() << result;
+
 	////if (result)
 	////{
 	////	ui.label->setText("success.");
@@ -248,7 +244,7 @@ void QT_BaseMainWindow::Tree_selectionChangedSlot(const QItemSelection & /*newSe
 	int searched_points = 0;
 	search::KdTree<PointXYZRGB>::Ptr tree(new search::KdTree<PointXYZRGB>);
 	tree->setInputCloud(nowCloud);
-	qDebug() << "001";
+
 	//取1000點做平均取距離
 	for (int i = 0; i < (nowCloud->size() >= 1000 ? 1000 : nowCloud->size()); ++i)
 	{
@@ -260,7 +256,7 @@ void QT_BaseMainWindow::Tree_selectionChangedSlot(const QItemSelection & /*newSe
 			++searched_points;
 		}
 	}
-	qDebug() << "002";
+
 	if (searched_points != 0) {
 		data.nowCloud_avg_distance = norm /= searched_points;
 		data.brush_radius = data.nowCloud_avg_distance * 50;
@@ -279,14 +275,14 @@ void QT_BaseMainWindow::Tree_importCloud() {
 	RedSelectClear();
 	initModes();
 
-	qDebug() << "HIIII for import";
+	qDebug() << "import";
 	CloudPoints_IO IO_Tool;
 	if (!IO_Tool.CloudImport()) {
-		qDebug() << "ERROW!!!!!";
+		qDebug() << "ERROR!!!!!";
 		return;
 	}
 
-	qDebug() << "HIIII for import END";
+	qDebug() << "import END";
 	bool ok;
 	QString text = QInputDialog::getText(this, tr("QInputDialog::getText()"),
 		tr("Layer name:"), QLineEdit::Normal,
@@ -298,7 +294,6 @@ void QT_BaseMainWindow::Tree_importCloud() {
 		TreeLayerController *tree_layerController = new TreeLayerController(data.standardModel);
 		if (!tree_layerController->AddLayer(text, IO_Tool.import_cloud_->makeShared()))
 			return;
-		qDebug() << "Here is in importCloud!";
 	}
 }
 //---------------
@@ -341,7 +336,7 @@ void QT_BaseMainWindow::Tree_exportCloud() {
 	}
 
 	RedSelectClear();
-	qDebug() << "HIIII for export";
+	qDebug() << "export";
 	CloudPoints_IO IO_Tool;
 	if (IO_Tool.CloudExport(children_CloudData))
 	{
@@ -497,8 +492,7 @@ void QT_BaseMainWindow::Tree_deleteLayer() {
 
 //Select For Tree
 void QT_BaseMainWindow::Area_PointCloud_Selector(const pcl::visualization::AreaPickingEvent& event) {
-	qDebug() << "0";
-	QModelIndex index = ui.treeView->selectionModel()->currentIndex();
+		QModelIndex index = ui.treeView->selectionModel()->currentIndex();
 	if (index.row() == -1)
 		return;
 
@@ -508,10 +502,8 @@ void QT_BaseMainWindow::Area_PointCloud_Selector(const pcl::visualization::AreaP
 	else if (std::string(data.standardModel->itemFromIndex(index)->data().typeName()) == "pcl::PointCloud<PointXYZRGB>::Ptr")
 		LayerCloud = data.standardModel->itemFromIndex(index)->data().value <PointCloud<PointXYZRGB>::Ptr>();
 
-	qDebug() << "2";
-	if (data.keyBoard_ctrl)
+		if (data.keyBoard_ctrl)
 	{
-		qDebug() << "1";
 		std::vector<int> lastIndices = data.Selected_ID;
 		std::vector<int> deIndices;
 		data.Selected_ID.clear();
@@ -536,7 +528,6 @@ void QT_BaseMainWindow::Area_PointCloud_Selector(const pcl::visualization::AreaP
 	}
 	else if (data.keyBoard_alt)
 	{
-		qDebug() << "1";
 		std::vector<int> lastIndices = data.Selected_ID;
 		std::vector<int> deIndices;
 		data.Selected_ID.clear();
@@ -565,22 +556,19 @@ void QT_BaseMainWindow::Area_PointCloud_Selector(const pcl::visualization::AreaP
 	}
 	else
 	{
-		qDebug() << "3";
 		RedSelectClear();
 		if (event.getPointsIndices(data.Selected_ID) > 0)
 		{
-			qDebug() << "4";
 			data.Selected_cloud->clear();
 			for (int i = 0; i < data.Selected_ID.size(); ++i)
 				data.Selected_cloud->points.push_back(LayerCloud->points.at(data.Selected_ID[i]));
-			qDebug() << "5";
+			
 			visualization::PointCloudColorHandlerCustom<PointXYZRGB> red(data.Selected_cloud, 255, 0, 0);
 			data.viewer->removePointCloud("Red_ChosenPoints");
 			data.viewer->addPointCloud(data.Selected_cloud, red, "Red_ChosenPoints");
 			qDebug() << data.Selected_cloud->size();
 			ui.qvtkWidget->update();
-			qDebug() << "6";
-		}
+				}
 		else
 		{
 			ui.qvtkWidget->update();
