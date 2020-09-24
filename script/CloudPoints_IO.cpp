@@ -40,15 +40,15 @@ bool CloudPoints_IO::csv2pointCloud() {
 			QStringList res = lineStr.split(",");//¤À³Î","
 			qDebug() << res.size();
 
-			if (res.size()==1)
+			if (res.size() == 1)
 			{
-				 res = lineStr.split(" ");
+				res = lineStr.split(" ");
 				qDebug() << res.size();
 			}
 
 			if (res.size() == 1)
 			{
-				 res = lineStr.split("/t");
+				res = lineStr.split("/t");
 				qDebug() << res.size();
 			}
 
@@ -68,6 +68,11 @@ bool CloudPoints_IO::csv2pointCloud() {
 		}
 		csvfile.close();
 
+		VoxelGrid<PointXYZRGB> vox;
+		vox.setInputCloud(import_cloud_);
+		vox.setLeafSize(0.001f, 0.001f, 0.001f);
+		vox.filter(*import_cloud_);
+
 		if (Line_i <= 1)
 			return (false);
 		else
@@ -84,8 +89,13 @@ bool CloudPoints_IO::CloudImport() {
 			return(true);
 	}
 	else if (suffix_ == "pcd") {
-		if (io::loadPCDFile<PointXYZRGB>(file_path_, *import_cloud_) != -1)
+		if (io::loadPCDFile<PointXYZRGB>(file_path_, *import_cloud_) != -1) {
+			VoxelGrid<PointXYZRGB> vox;
+			vox.setInputCloud(import_cloud_);
+			vox.setLeafSize(0.001f, 0.001f, 0.001f);
+			vox.filter(*import_cloud_);
 			return(true);
+		}
 	}
 	else
 		return(false);
