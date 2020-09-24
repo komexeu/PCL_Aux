@@ -139,8 +139,10 @@ void QT_BaseMainWindow::ViewCloudUpdate(PointCloud<PointXYZRGB>::Ptr updateCloud
 	ui.qvtkWidget->update();
 }
 void QT_BaseMainWindow::RedSelectClear() {
+	data.select_map.clear();
 	data.Selected_cloud->clear();
-	data.viewer->updatePointCloud(data.Selected_cloud, "Red_ChosenPoints");
+	/*data.Selected_cloud->clear();
+	data.viewer->updatePointCloud(data.Selected_cloud, "Red_ChosenPoints");*/
 }
 void QT_BaseMainWindow::initModes() {
 	QIcon icon;
@@ -471,6 +473,7 @@ void QT_BaseMainWindow::Tree_Smooth() {
 		itemCloud.setValue(smooth_cld);
 		data.standardModel->itemFromIndex(index)->setData(itemCloud);
 
+		data.Selected_cloud = smooth_cld->makeShared();
 		//view update
 		ViewCloudUpdate(smooth_cld, false);
 	}
@@ -540,14 +543,14 @@ void QT_BaseMainWindow::Area_PointCloud_Selector(const pcl::visualization::AreaP
 	//AREA PICK CLOUD
 	std::vector<int> foundPointID;
 	if (event.getPointsIndices(foundPointID) <= 0) {
-		qDebug() << "ZERO" << foundPointID.size();
+		//qDebug() << "ZERO" << foundPointID.size();
 		////快速多次選取閃退(原因為更新點雲ViewCloudUpdate)
 		if (!data.select_map.empty()) {
 			data.select_map.clear();
 			data.Selected_cloud->clear();
 			ViewCloudUpdate(LayerCloud->makeShared(), false);
 		}
-		qDebug() << "ZERO END";
+	//	qDebug() << "ZERO END";
 		return;
 	}
 
@@ -583,7 +586,7 @@ void QT_BaseMainWindow::Area_PointCloud_Selector(const pcl::visualization::AreaP
 	}
 	else
 	{
-		qDebug() << "NO KEY" << foundPointID.size();
+		//qDebug() << "NO KEY" << foundPointID.size();
 		data.select_map.clear();
 		data.Selected_cloud->clear();
 		//data.Selected_cloud.reset(new PointCloud<PointXYZRGB>);
@@ -635,7 +638,7 @@ void QT_BaseMainWindow::cursor_BrushSelector(const pcl::visualization::MouseEven
 			float mouseY = (viewer_interactor->GetEventPosition()[1]);
 			viewer_interactor->StartPickCallback();
 			vtkRenderer *ren = viewer_interactor->FindPokedRenderer(mouseX, mouseY);
-			qDebug() << "x:" << mouseX << "y:" << mouseY;
+			//qDebug() << "x:" << mouseX << "y:" << mouseY;
 			point_picker->Pick(mouseX, mouseY, 0.0, ren);
 			double picked[3]; point_picker->GetPickPosition(picked);
 
@@ -886,7 +889,8 @@ void  QT_BaseMainWindow::Brush_change() {
 	if (data.BrushMode)
 	{
 		data.brush_radius = data.nowCloud_avg_distance *ui.Brush_ClusterSpinBox->value();
-
+		//qDebug() << data.brush_radius;
+	
 		ui.label->setText(std::to_string(data.brush_radius).c_str());
 		ui.qvtkWidget->update();
 	}
