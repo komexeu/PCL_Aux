@@ -2,6 +2,7 @@
 
 //stl
 #include <vector>
+#include <map>
 
 //self
 #include "ui_pclauxilary.h"
@@ -34,7 +35,7 @@ public:
 
 	QT_BaseMainWindow(QWidget *parent = Q_NULLPTR);
 	//更新畫面
-	void ViewCloudUpdate(PointCloud<PointXYZRGB>::Ptr updateCloud, bool resetCamera);
+	static void ViewCloudUpdate(PointCloud<PointXYZRGB>::Ptr updateCloud, bool resetCamera);
 	//紅色標記區域刪除
 	static void RedSelectClear();
 	//初始化模式
@@ -68,6 +69,8 @@ public Q_SLOTS:
 	void Tree_deleteLayer();
 	//自選點雲分割(生成圖層)
 	void Tree_UserSegmentation();
+	//筆刷大小
+	void Brush_change();
 
 private:
 	void roll(QList<QModelIndex> &indexList, QModelIndex index);
