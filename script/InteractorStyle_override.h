@@ -65,15 +65,9 @@ public:
 			}
 			break;
 		}
-		case 'e':case'E': {
-			CurrentMode = AREA_SELECT_MODE;
-			//Interactor->GetPicker();
-			vtkSmartPointer<vtkAreaPicker> area_picker = vtkSmartPointer<vtkAreaPicker>::New();
-			Interactor->SetPicker(area_picker);
-			break;
-		}
 		case 'b':case'B': {
 			qDebug() << "PRESS B";
+
 			CurrentMode = DEFAULT_SELECT_MODE;
 			//vtkSmartPointer<vtkPointPicker> point_picker = vtkSmartPointer<vtkPointPicker>::New();
 			Interactor->SetPicker(point_picker_);
@@ -107,7 +101,7 @@ public:
 	// mouse button events
 	void
 		OnMouseMove() override {
-		qDebug() << "mouse MOVE.";
+		//qDebug() << "mouse MOVE.";
 		Superclass::OnMouseMove();
 	}
 
