@@ -47,10 +47,10 @@ using namespace std;
 class ICloudPoints_Tools
 {
 public:
-	virtual std::vector<PointIndices> CloudSegmentation(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, int sliderValue) = 0;
+	virtual std::vector<PointIndices> CloudSegmentation(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, int sliderValue, float nowCloud_avg_distance) = 0;
 	virtual std::vector<complax_cloudInformation> cloudSegComplax(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, int sliderValue) = 0;
 	virtual void CloudColor(PointCloud<PointXYZRGB>::Ptr nowLayerCloud) = 0;
-	virtual PointCloud<PointXYZRGB>::Ptr CloudSmooth(PointCloud<PointXYZRGB>::Ptr nowLayerCloud) = 0;
+	virtual PointCloud<PointXYZRGB>::Ptr CloudSmooth(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, float smooth_strength) = 0;
 	virtual void registrationClouds(vector<PointCloud<PointXYZRGB>::Ptr> clouds) = 0;
 };
 //點雲處理工具，用於對點雲進行分割、平滑化、顏色變換等處理
@@ -62,10 +62,10 @@ public:
 
 	}
 
-	std::vector<PointIndices> CloudSegmentation(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, int sliderValue);
+	std::vector<PointIndices> CloudSegmentation(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, int sliderValue, float nowCloud_avg_distance);
 	std::vector<complax_cloudInformation> cloudSegComplax(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, int sliderValue);
 	void CloudColor(PointCloud<PointXYZRGB>::Ptr nowLayerCloud);
-	PointCloud<PointXYZRGB>::Ptr CloudSmooth(PointCloud<PointXYZRGB>::Ptr nowLayerCloud);
+	PointCloud<PointXYZRGB>::Ptr CloudSmooth(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, float smooth_strength);
 	void registrationClouds(vector<PointCloud<PointXYZRGB>::Ptr> clouds);
 private:
 };

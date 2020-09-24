@@ -49,7 +49,8 @@ using pcl::visualization::PointCloudColorHandlerCustom;
 //		next_iteration = true;
 //}
 
-std::vector<PointIndices> CloudPoints_Tools::CloudSegmentation(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, int sliderValue) {
+std::vector<PointIndices> CloudPoints_Tools::CloudSegmentation(PointCloud<PointXYZRGB>::Ptr nowLayerCloud
+	, int sliderValue,float nowCloud_avg_distance) {
 	std::vector<PointCloud<PointXYZRGB>::Ptr> cluster_clouds_;
 	std::vector<PointIndices> cluster_indice;
 	if (nowLayerCloud->size() > 700000)
@@ -59,34 +60,18 @@ std::vector<PointIndices> CloudPoints_Tools::CloudSegmentation(PointCloud<PointX
 	PointCloud<PointXYZRGB>::Ptr nowLayrCloudClone(new PointCloud<PointXYZRGB>);
 	copyPointCloud(*nowLayerCloud, *nowLayrCloudClone);
 
-	std::vector<int> k_indices;
-	std::vector<float> k_sqr_distances;
-	int n = 0;
-	float norm = 0;
-	int searched_points = 0;
 	search::KdTree<PointXYZRGB>::Ptr tree(new search::KdTree<PointXYZRGB>);
 	tree->setInputCloud(nowLayrCloudClone);
-	for (int i = 0; i < nowLayrCloudClone->size(); i++)
-	{
-		n = tree->nearestKSearch(i, 2, k_indices, k_sqr_distances);
-		if (n == 2)
-		{
-			norm += sqrt(k_sqr_distances[1]);
-			++searched_points;
-		}
-	}
-	double point_avg_distance = 0;
-	if (searched_points != 0)
-		point_avg_distance = norm /= searched_points;
-	qDebug() << point_avg_distance;
-	if (point_avg_distance == 0)
+		
+	if (nowCloud_avg_distance == 0)
 	{
 		return cluster_indice;
 		qDebug() << "NO DATA";
 	}
 
+	qDebug() << "22222222222INSEGMENTATION2222";
 	EuclideanClusterExtraction<PointXYZRGB> ec;
-	ec.setClusterTolerance(double(sliderValue *point_avg_distance*0.01));
+	ec.setClusterTolerance(double(sliderValue *nowCloud_avg_distance*0.01));
 	ec.setMinClusterSize(300);
 	ec.setSearchMethod(tree);
 	ec.setInputCloud(nowLayrCloudClone);
@@ -174,7 +159,7 @@ void CloudPoints_Tools::CloudColor(PointCloud<PointXYZRGB>::Ptr nowLayerCloud) {
 
 }
 
-PointCloud<PointXYZRGB>::Ptr CloudPoints_Tools::CloudSmooth(PointCloud<PointXYZRGB>::Ptr nowLayerCloud) {
+PointCloud<PointXYZRGB>::Ptr CloudPoints_Tools::CloudSmooth(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, float smooth_strength) {
 	PointCloud<PointXYZRGB>::Ptr smoothCloud(new PointCloud<PointXYZRGB>);
 	MovingLeastSquares<PointXYZRGB, PointXYZRGB>::Ptr mls(new MovingLeastSquares<PointXYZRGB, PointXYZRGB>);
 	search::KdTree<PointXYZRGB>::Ptr tree(new search::KdTree<PointXYZRGB>);
@@ -184,10 +169,10 @@ PointCloud<PointXYZRGB>::Ptr CloudPoints_Tools::CloudSmooth(PointCloud<PointXYZR
 	mls->setComputeNormals(true);
 	mls->setInputCloud(nowLayerCloud);
 	mls->setSearchMethod(tree);
-	mls->setPolynomialOrder(2);
-	mls->setNumberOfThreads(1);
+	//mls->setPolynomialOrder(2);
+	//mls->setNumberOfThreads(1);
 	//mls->setPointDensity(nowLayerCloud->size());
-	mls->setSearchRadius(0.01);
+	mls->setSearchRadius(smooth_strength);
 	//mls->setPolynomialFit(true);
 	mls->process(*smoothCloud);
 
@@ -246,7 +231,7 @@ void pairAlign(const PointCloud<PointXYZRGB>::Ptr sourceCloud,
 
 	PointCloud<PointXYZRGB>::Ptr src(new PointCloud<PointXYZRGB>);
 	PointCloud<PointXYZRGB>::Ptr tgt(new PointCloud<PointXYZRGB>);
-	
+
 	//=============================
 	//減少點雲
 	qDebug() << "VoxelGrid";
@@ -287,7 +272,7 @@ void pairAlign(const PointCloud<PointXYZRGB>::Ptr sourceCloud,
 
 	//-----------
 	MyPointRepresentation point_representation;
-	float alpha[4] = {1.0,1.0,1.0,1.0 };
+	float alpha[4] = { 1.0,1.0,1.0,1.0 };
 	point_representation.setRescaleValues(alpha);
 	//--------------------
 	pcl::IterativeClosestPointNonLinear<PointNormal, PointNormal> reg;
@@ -303,20 +288,20 @@ void pairAlign(const PointCloud<PointXYZRGB>::Ptr sourceCloud,
 
 	Eigen::Matrix4f Ti = Eigen::Matrix4f::Identity(), prev, targetToSource;
 	PointCloud<PointNormal>::Ptr reg_result(new PointCloud<PointNormal>);
-	reg_result= src_normal;
-	for (int i = 0; i <30; ++i)
+	reg_result = src_normal;
+	for (int i = 0; i < 30; ++i)
 	{
 		PCL_INFO("Iteration Nr. %d.\n", i);
 
 		// save cloud for visualization purpose
 		src_normal = reg_result;
-		qDebug() <<"src_normal"<< src_normal->size();
+		qDebug() << "src_normal" << src_normal->size();
 
 		// Estimate
 		reg.setInputSource(src_normal);
 		qDebug() << "align...";
 		reg.align(*reg_result);
-		qDebug ()<< "align_normal" << reg_result->size();
+		qDebug() << "align_normal" << reg_result->size();
 
 		//accumulate transformation between each Iteration
 		Ti = reg.getFinalTransformation() * Ti;
@@ -391,7 +376,7 @@ void CloudPoints_Tools::registrationClouds(vector<PointCloud<PointXYZRGB>::Ptr> 
 
 	//sor.setInputCloud(targetCloud);	
 	//sor.filter(*outFile_target);
-	
+
 	//============================
 	p = new pcl::visualization::PCLVisualizer();
 	p->createViewPort(0.0, 0, 0.5, 1.0, vp_1);
