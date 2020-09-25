@@ -3,7 +3,7 @@
 ***平台 :** Window 10 x64*
 
 ## V.1.0.0版本介面
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/V100_FULL.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/V100_FULL.png)
 
 ## 簡介 :
 > 尚未完成之EXE檔，僅供臨時分割使用。
@@ -26,8 +26,8 @@
 ### Data Export(點雲輸出):
 * 輸出.pcd
 * 點選一個圖層，自動抓取底下已分割完成的所有子類圖層資訊
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/version_05a_1.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/version_05a_2.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/version_05a_1.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/version_05a_2.png)
 > 使用限制 :
 > - 僅輸出.pcd(x,y,z,rgb,ID)
 
@@ -36,8 +36,8 @@
 >- 暫時鎖定，無法使用
  
 ### Slider Segmentate(滑條分割模式):
- * 拉動滑條進行快速分割預覽 ![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/version_05a_3.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/tmp_version_05a_4.png)
+ * 拉動滑條進行快速分割預覽 ![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/version_05a_3.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/tmp_version_05a_4.png)
 * 點選Slider Segmentate確定分割。
 > 使用限制 :
 >- 因效能問題暫時將可處理資料點設定在100,000內。
@@ -45,14 +45,14 @@
 
 ### User Segmentate(已選點手動分割):
 * 對手動分割工具(X框選/B筆刷)進行標記。
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/tmp_version_05a_5.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/tmp_version_05a_6.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/tmp_version_05a_5.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/tmp_version_05a_6.png)
 * 點選User Segmentate確定分割。
 
 ### smooth(平滑化):
 * 對不平滑點雲進行平滑化
 * 拉動Smooth Slider設定平滑參數(數值越大耗時越久)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/V100_smooth.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/V100_smooth.png)
 * 點選左方Smooth確定平滑化。
 
 > 使用限制 :
@@ -61,7 +61,7 @@
 ### 筆刷調整:
 * 在筆刷模式下拉動 Brush Slider 控制滑條大小。
 * 在筆刷模式下使用"N"縮小筆刷，"M"放大筆刷。
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/V100_brush.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/V100_brush.png)
  
  ## 工具快捷鍵
 |快捷鍵|功能| 備註 | 
@@ -77,41 +77,41 @@
 ## 使用範例:
 > "Data Import"匯入點雲:
 
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_1.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_2.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_3.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_1.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_2.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_3.png)
 
 > 點雲數量為921599，手動將資料量降低，步驟:
 
  1. 按下"x"鍵開啟框選標記功能。
  2. 標記完畢後按下左側"User Segmentate"。
  
- ![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_4.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_5.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_6.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_7.png)
+ ![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_4.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_5.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_6.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_7.png)
 
 > 快速群集分割，步驟:
 
  1. 使用底下滑條來做快速基本分割，以不同顏色來分割表示結果預覽。
  2. 確定範圍後按下"Slider Segmentate"來做分割。
 
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_8.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_9.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_10.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_11.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_8.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_9.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_10.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_11.png)
 > 使用垃圾桶刪除不要的圖層。
 
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_13.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_14.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_13.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_14.png)
 
 > 按下"Data Export"輸出資料(紅框內為選取不同圖層後，對應輸出的圖層)。
 
  - 點選20200619154445.pcd對應輸出的圖層數為2(ID 為 0,1)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_15.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_15.png)
  - 點選point_nd_decrease_0.pcd對應輸出的圖層數為5(ID 為 0,1,2,3,4)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_16.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_16.png)
 > 輸出資料內容
 
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_18.png)
-![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/Usage%20example_17.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_18.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Usage%20example_17.png)
