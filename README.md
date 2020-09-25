@@ -1,14 +1,17 @@
 ﻿# PCL_Aux  
-***version:**  tmp_version 0.5a*
+***version:**  V.1.0.0*
 ***平台 :** Window 10 x64*
+
+## V.1.0.0版本介面
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/V100_FULL.png)
 
 ## 簡介 :
 > 尚未完成之EXE檔，僅供臨時分割使用。
 
 ## 安裝說明:
-> 將Aux_release1.7z解壓縮
+> 到分支BasePackage將下載Aux_release_Base.7z解壓縮
 
-> 將下方IntelRealsense.dll / realsense2.dll / PCLAuxilary.exe覆蓋進Aux_release1.7z解壓縮後的檔案。
+> 將 PCLAuxilary.exe覆蓋進Aux_release_Base。
 
 > 點選PCLAuxilary.exe即可直接使用。
 
@@ -48,8 +51,17 @@
 
 ### smooth(平滑化):
 * 對不平滑點雲進行平滑化
+* 拉動Smooth Slider設定平滑參數(數值越大耗時越久)
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/V100_smooth.png)
+* 點選左方Smooth確定平滑化。
+
 > 使用限制 :
 >- 資料點太大或電腦效能較不佳處理時序較久，有可能造成崩潰。
+
+### 筆刷調整:
+* 在筆刷模式下拉動 Brush Slider 控制滑條大小。
+* 在筆刷模式下使用"N"縮小筆刷，"M"放大筆刷。
+![enter image description here](https://github.com/komexeu/Pic_Wareh/blob/master/V100_brush.png)
  
  ## 工具快捷鍵
 |快捷鍵|功能| 備註 | 
