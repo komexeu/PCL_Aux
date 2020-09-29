@@ -138,12 +138,14 @@ void QT_BaseMainWindow::ViewCloudUpdate(PointCloud<PointXYZRGB>::Ptr updateCloud
 		data.viewer->resetCamera();
 	ui.qvtkWidget->update();
 }
+
 void QT_BaseMainWindow::RedSelectClear() {
 	data.select_map.clear();
 	data.Selected_cloud->clear();
 	/*data.Selected_cloud->clear();
 	data.viewer->updatePointCloud(data.Selected_cloud, "Red_ChosenPoints");*/
 }
+
 void QT_BaseMainWindow::initModes() {
 	QIcon icon;
 
@@ -156,9 +158,29 @@ void QT_BaseMainWindow::initModes() {
 	data.viewer->addPointCloud(nullCloud, "White_BrushCursorPoints");
 }
 
+#include "PCL_AUX_Button.h"
+
 //SLOTS
 void QT_BaseMainWindow::realsense_getpoints() {
+	PCL_AUX_Button *w = new PCL_AUX_Button(ui.formWidget);
+	w->setObjectName(QString::fromUtf8("ww"));
+	w->setMouseTracking(true);
+	w->setText("JOOOO");
+	w->setFramesNum(9);
+	w->show();
 
+	//QObject::connect(w, SIGNAL(clicked()), this, SLOT(w->PLAY()));
+
+	/*QPropertyAnimation *animation = new QPropertyAnimation(ui.pushButton_5,"alpha");
+	animation->setDuration(1000);
+	animation->setKeyValueAt(0, 255);
+	animation->setKeyValueAt(0.5, 100);
+	animation->setKeyValueAt(1, 255);
+	animation->setLoopCount(-1);
+	animation->start();*/
+
+
+	//m_haloAnimation->start();	
 
 	//================================
 	/*ui.label->setText("Picking cloud...");
@@ -485,9 +507,16 @@ void QT_BaseMainWindow::Tree_Smooth() {
 //--------------------
 void QT_BaseMainWindow::Tree_UserSegmentation() {
 	QModelIndex index = ui.treeView->selectionModel()->currentIndex();
+
+	PointCloud<PointXYZRGB>::Ptr LayerCloud;
+	if (std::string(data.standardModel->itemFromIndex(index)->data().typeName()) == "complax_cloudInformation")
+		LayerCloud = data.standardModel->itemFromIndex(index)->data().value <complax_cloudInformation>().cloud_data;
+	else if (std::string(data.standardModel->itemFromIndex(index)->data().typeName()) == "pcl::PointCloud<PointXYZRGB>::Ptr")
+		LayerCloud = data.standardModel->itemFromIndex(index)->data().value <PointCloud<PointXYZRGB>::Ptr>();
+
 	if (index.row() == -1)
 		return;
-	if (data.Selected_cloud->size() > 0)
+	if (data.select_map.size() > 0)
 	{
 		bool ok;
 		QString text = QInputDialog::getText(this, tr("QInputDialog::getText()"),
@@ -496,18 +525,14 @@ void QT_BaseMainWindow::Tree_UserSegmentation() {
 		if (ok && !text.isEmpty())
 		{
 			TreeLayerController ly(data.standardModel);
-			//complax_cloudInformation clf;
-			//clf.cloud_data = data.Selected_cloud->makeShared();
 			PointCloud<PointXYZRGB>::Ptr newCloud(new PointCloud<PointXYZRGB>);
-			for (int i = 0; i < data.Selected_cloud->size(); i++)
-			{
-				if (data.Selected_cloud->points[i].x != NULL)
-					newCloud->push_back(data.Selected_cloud->points[i]);
-			}
+
+			for (map<int, PointXYZRGB>::iterator iter = data.select_map.begin(); iter != data.select_map.end(); ++iter)
+				newCloud->push_back(LayerCloud->points.at(iter->first));
+			
 			if (!ly.AddLayer(text, newCloud->makeShared(), index))
 				return;
 
-			qDebug() << data.Selected_cloud->size();
 			RedSelectClear();
 		}
 	}
@@ -550,7 +575,7 @@ void QT_BaseMainWindow::Area_PointCloud_Selector(const pcl::visualization::AreaP
 			data.Selected_cloud->clear();
 			ViewCloudUpdate(LayerCloud->makeShared(), false);
 		}
-	//	qDebug() << "ZERO END";
+		//	qDebug() << "ZERO END";
 		return;
 	}
 
@@ -652,7 +677,7 @@ void QT_BaseMainWindow::cursor_BrushSelector(const pcl::visualization::MouseEven
 			pickPoint.r = 255, pickPoint.g = 255, pickPoint.b = 255;
 
 			if (tree->radiusSearch(pickPoint, data.brush_radius, foundPointID, foundPointSquaredDistance) > 0)
-			{				
+			{
 				for (int i = 0; i < foundPointID.size() - 1; ++i) {
 					//if (i > foundPointID.size()*0.9)
 					cursor_premark->push_back(LayerCloud->points[foundPointID[i]]);
@@ -767,8 +792,13 @@ void QT_BaseMainWindow::KeyBoard_eventController(const pcl::visualization::Keybo
 	}
 
 	if ((event.getKeySym() == "b" || event.getKeySym() == "B") && event.keyDown()) {
-		if (data.AreaSelectMode)
-			return;
+		if (data.AreaSelectMode) {
+			data.AreaSelectMode = !data.AreaSelectMode;
+			QIcon icon;
+			icon.addFile(QString::fromUtf8("./PCLAuxilary_pic_sorce/AreaSelect.png"), QSize(), QIcon::Normal, QIcon::Off);
+			data.ToolButtonManager[3]->setIcon(icon);
+			//return;
+		}
 
 		data.BrushMode = !data.BrushMode;
 		if (!data.BrushMode)
@@ -890,7 +920,7 @@ void  QT_BaseMainWindow::Brush_change() {
 	{
 		data.brush_radius = data.nowCloud_avg_distance *ui.Brush_ClusterSpinBox->value();
 		//qDebug() << data.brush_radius;
-	
+
 		ui.label->setText(std::to_string(data.brush_radius).c_str());
 		ui.qvtkWidget->update();
 	}
