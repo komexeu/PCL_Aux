@@ -3,7 +3,7 @@
 ***平台 :** Window 10 x64*
 
 ## V.1.0.0版本介面
-![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/V100_FULL.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Viewer.png)
 
 ## 簡介 :
 > 尚未完成之EXE檔，僅供臨時分割使用。
