@@ -6,7 +6,7 @@
 ![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/Viewer.png)
 
 ## 簡介 :
-> 尚未完成之EXE檔，僅供臨時分割使用。
+> 簡易版本，主要可進行點雲輸入/輸出/分割/平滑化。
 
 ## 安裝說明:
 > 到分支BasePackage將下載Aux_release_Base.7z解壓縮
