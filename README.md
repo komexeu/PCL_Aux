@@ -9,11 +9,9 @@
 > 簡易版本，主要可進行點雲輸入/輸出/分割/平滑化。
 
 ## 安裝說明:
-> 到分支BasePackage將下載Aux_release_Base.7z解壓縮
+> 第一次下載: https://github.com/komexeu/PCL_Aux/tree/v.1.0.0_x64
 
-> 將 PCLAuxilary.exe覆蓋進Aux_release_Base。
-
-> 點選PCLAuxilary.exe即可直接使用。
+> 更新: 下載PCLAuxilary.exe並覆蓋舊檔。
 
 ## 使用方法:
 ### Data Import(點雲輸入):
