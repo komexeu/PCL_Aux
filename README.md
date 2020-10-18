@@ -13,6 +13,14 @@
 
 > 更新: 下載PCLAuxilary.exe並覆蓋舊檔。
 
+# 待更新功能&操作解:
+### 1. 使用N/M鍵對筆刷放大縮小，螢幕上筆刷大小未縮放
+      目前筆刷無法在停留狀態更新，移動滑鼠即可更新筆刷。
+### 2. 可不可以點選按鈕啟用工具?
+      目前暫時沒有啟用此功能，下次更新將會啟用。
+### 3. 滑鼠使用完滑條或按鈕後鍵盤沒反應
+      目前裡外視窗按鍵未同步，可以在點完外部滑條或按鈕後，點一下內部視窗即可正常操作。
+
 ## 使用方法:
 ### Data Import(點雲輸入):
 * 可輸入.pcd與.csv
@@ -44,7 +52,7 @@
 ### User Segmentate(已選點手動分割):
 * 對手動分割工具(X框選/B筆刷)進行標記。
 ![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/tmp_version_05a_5.png)
-![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/tmp_version_05a_6.png)
+![enter image description here](https://github.com/komexeu/PCL_Aux/blob/Picture_readme/readme_image/tmp_version_05a_6.png)  
 * 點選User Segmentate確定分割。
 
 ### smooth(平滑化):
