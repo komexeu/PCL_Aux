@@ -20,24 +20,24 @@
 //#include <pcl/segmentation/sac_segmentation.h>
 
 //ICP
-#include <pcl/point_representation.h>
-
-#include <pcl/io/pcd_io.h>
-
-#include <pcl/filters/voxel_grid.h>
-#include <pcl/filters/filter.h>
-
-#include <pcl/registration/ndt.h>
-#include <pcl/filters/approximate_voxel_grid.h>
-
-#include <pcl/features/normal_3d.h>
-
-#include <pcl/registration/icp.h>
-#include <pcl/registration/icp_nl.h>
-#include <pcl/registration/transforms.h>
-
-
-#include <pcl/common/transforms.h>
+//#include <pcl/point_representation.h>
+//
+//#include <pcl/io/pcd_io.h>
+//
+//#include <pcl/filters/voxel_grid.h>
+//#include <pcl/filters/filter.h>
+//
+//#include <pcl/registration/ndt.h>
+//#include <pcl/filters/approximate_voxel_grid.h>
+//
+//#include <pcl/features/normal_3d.h>
+//
+//#include <pcl/registration/icp.h>
+//#include <pcl/registration/icp_nl.h>
+//#include <pcl/registration/transforms.h>
+//
+//
+//#include <pcl/common/transforms.h>
 
 //have to delete use the struct
 #include "LayerControl.h"
@@ -51,7 +51,7 @@ public:
 	virtual std::vector<complax_cloudInformation> cloudSegComplax(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, int sliderValue) = 0;
 	virtual void CloudColor(PointCloud<PointXYZRGB>::Ptr nowLayerCloud) = 0;
 	virtual PointCloud<PointXYZRGB>::Ptr CloudSmooth(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, float smooth_strength) = 0;
-	virtual void registrationClouds(vector<PointCloud<PointXYZRGB>::Ptr> clouds) = 0;
+	//virtual void registrationClouds(vector<PointCloud<PointXYZRGB>::Ptr> clouds) = 0;
 };
 //點雲處理工具，用於對點雲進行分割、平滑化、顏色變換等處理
 class CloudPoints_Tools :ICloudPoints_Tools
@@ -66,7 +66,7 @@ public:
 	std::vector<complax_cloudInformation> cloudSegComplax(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, int sliderValue);
 	void CloudColor(PointCloud<PointXYZRGB>::Ptr nowLayerCloud);
 	PointCloud<PointXYZRGB>::Ptr CloudSmooth(PointCloud<PointXYZRGB>::Ptr nowLayerCloud, float smooth_strength);
-	void registrationClouds(vector<PointCloud<PointXYZRGB>::Ptr> clouds);
+	//void registrationClouds(vector<PointCloud<PointXYZRGB>::Ptr> clouds);
 private:
 };
 class MyPointRepresentation : public pcl::PointRepresentation <pcl::PointNormal>

@@ -12,19 +12,21 @@
 
 //qt
 #include <QtWidgets/QMainWindow>
+#include <qpropertyanimation.h>
+#include <QSequentialAnimationGroup>
 
 //vtk
 #include <vtkRenderWindow.h>
 #include <vtkAutoInit.h>
 #include <vtkRenderWindow.h>
 #include <vtkAutoInit.h>
-VTK_MODULE_INIT(vtkRenderingOpenGL);
+//VTK_MODULE_INIT(vtkRenderingOpenGL);
 #include <vtkLODActor.h>
 #include <vtkPointpicker.h>
 #include <vtkPropPicker.h>
-#include <glut.h>
-#define vtkRenderingCore_AUTOINIT 4(vtkInteractionStyle,vtkRenderingFreeType,vtkRenderingFreeTypeOpenGL,vtkRenderingOpenGL)
-#define vtkRenderingVolume_AUTOINIT 1(vtkRenderingVolumeOpenGL)
+//#include <glut.h>
+//#define vtkRenderingCore_AUTOINIT 4(vtkInteractionStyle,vtkRenderingFreeType,vtkRenderingFreeTypeOpenGL,vtkRenderingOpenGL)
+//#define vtkRenderingVolume_AUTOINIT 1(vtkRenderingVolumeOpenGL)
 
 using namespace pcl;
 

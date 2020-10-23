@@ -14,7 +14,7 @@
 #include <qtreeview.h>
 #include <qstandarditemmodel.h>
 //--------------------
-#include "realsense_control.h"
+//#include "realsense_control.h"
 #include "CloudPoints_IO.h"
 #include "LayerControl.h"
 #include <omp.h>
@@ -45,8 +45,8 @@ QT_BaseMainWindow::QT_BaseMainWindow(QWidget *parent) :QMainWindow(parent)
 	data.layerMapper = new QSignalMapper();
 	//--------visualization init--------------
 	pcl::visualization::PCLVisualizerInteractorStyle *sty_ovr = InteractorStyle_override::New();
-	int gc; char** gv;
-	data.viewer.reset(new pcl::visualization::PCLVisualizer(gc, gv, "viewer", sty_ovr, false));
+	//int gc; char** gv;
+	data.viewer.reset(new pcl::visualization::PCLVisualizer(__argc, __argv, "viewer", sty_ovr, false));
 	data.viewer->setBackgroundColor(0.8, 0.8, 0.8);
 	ui.qvtkWidget->SetRenderWindow(data.viewer->getRenderWindow());
 	data.viewer->setupInteractor(ui.qvtkWidget->GetInteractor(), ui.qvtkWidget->GetRenderWindow());
@@ -79,7 +79,7 @@ QT_BaseMainWindow::QT_BaseMainWindow(QWidget *parent) :QMainWindow(parent)
 	data.ToolButtonManager.push_back(toolManager.AddToolButton("./PCLAuxilary_pic_sorce/images.png", "deleteLayer"));
 	QObject::connect(data.ToolButtonManager[0], SIGNAL(clicked()), this, SLOT(Tree_deleteLayer()));
 	data.ToolButtonManager.push_back(toolManager.AddToolButton("./PCLAuxilary_pic_sorce/rename_icon.png", "renameLayer"));
-	QObject::connect(data.ToolButtonManager[1], SIGNAL(clicked()), this, SLOT(ToolBTN_renameLayer()));
+	//QObject::connect(data.ToolButtonManager[1], SIGNAL(clicked()), this, SLOT(ToolBTN_renameLayer()));
 	data.ToolButtonManager.push_back(toolManager.AddToolButton("./PCLAuxilary_pic_sorce/cursor1-2.png", "brush"));
 	data.ToolButtonManager.push_back(toolManager.AddToolButton("./PCLAuxilary_pic_sorce/AreaSelect.png", "areaSelect"));
 	//------treeView-----------------
@@ -162,6 +162,7 @@ void QT_BaseMainWindow::initModes() {
 
 //SLOTS
 void QT_BaseMainWindow::realsense_getpoints() {
+	
 	PCL_AUX_Button *w = new PCL_AUX_Button(ui.formWidget);
 	w->setObjectName(QString::fromUtf8("ww"));
 	w->setMouseTracking(true);
@@ -432,7 +433,7 @@ void QT_BaseMainWindow::Tree_Slider_PreSegCloud() {
 		copyPointCloud(*data.standardModel->itemFromIndex(index)->data().value<PointCloud<PointXYZRGB>::Ptr>(), *database_cloud);
 		copyPointCloud(*data.standardModel->itemFromIndex(index)->data().value<PointCloud<PointXYZRGB>::Ptr>(), *cld);
 	}
-
+	
 	std::vector<PointIndices> seg_cloud_2 = cpTools.CloudSegmentation(cld, ui.seg_spinBox->value(), data.nowCloud_avg_distance);
 	qDebug() << "WHITE";
 	for (int i = 0; i < cld->size(); i++)
@@ -666,13 +667,13 @@ void QT_BaseMainWindow::cursor_BrushSelector(const pcl::visualization::MouseEven
 			//qDebug() << "x:" << mouseX << "y:" << mouseY;
 			point_picker->Pick(mouseX, mouseY, 0.0, ren);
 			double picked[3]; point_picker->GetPickPosition(picked);
-
+			
 			PointCloud<PointXYZRGB>::Ptr cursor_premark(new PointCloud<PointXYZRGB>);
 			KdTreeFLANN<PointXYZRGB>::Ptr tree(new KdTreeFLANN<PointXYZRGB>);
 			std::vector<int> foundPointID;
 			std::vector<float> foundPointSquaredDistance;
 			tree->setInputCloud(LayerCloud);
-			PointXYZRGB pickPoint(picked[0], picked[1], picked[2]);
+			PointXYZRGB pickPoint;
 			pickPoint.x = picked[0]; pickPoint.y = picked[1]; pickPoint.z = picked[2];
 			pickPoint.r = 255, pickPoint.g = 255, pickPoint.b = 255;
 
