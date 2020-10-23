@@ -13,10 +13,7 @@
 > 簡易版本，主要可進行點雲輸入/輸出/分割/平滑化。
 
 ## 安裝說明:
-> 第一次下載: https://github.com/komexeu/PCL_Aux/releases/tag/v.1.0.0_PCLv1.11.1_x64  下載msi安裝檔
-
-> 更新: 下載PCLAuxilary.exe並覆蓋舊檔。
-
+> 下載: https://github.com/komexeu/PCL_Aux/releases/tag/v.1.0.0_PCLv1.11.1_x64  下載msi安裝檔
 
 # 待更新功能&操作解:
 ### 1. 使用N/M鍵對筆刷放大縮小，螢幕上筆刷大小未縮放
